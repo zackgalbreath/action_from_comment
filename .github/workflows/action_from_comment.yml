@@ -1,0 +1,13 @@
+name: Respond to PR comment
+on:
+  issue_comment:
+    types: [created, edited]
+jobs:
+  respond:
+    if: ${{ github.event.issue.pull_request }}    # only respond to PR comments, not issues
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Respond to PR comment
+        if: contains(github.event.comment.body, '/action')   # check if the comment contains the keyword
+        run: |
+          echo "I am running your action now!"
